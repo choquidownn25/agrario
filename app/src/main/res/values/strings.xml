@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Agrisoft</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="str_btn_find">Buscar</string>
+    <string name="title_section1">Bienvenido</string>
+    <string name="hint">Entre Lugar</string>
+    <string name="navigation_drawer_open">Abre navegacion</string>
+    <string name="navigation_drawer_close">Cierra Navegacion</string>
+    <string name="action_example">Ejemplo</string>
+    <string name="title_section2">Titulo 2</string>
+    <string name="title_section3">Titulo 3</string>
+    <dimen name="count">10dp</dimen>
+    <string name="image_loading">loading image...</string>
+    <string name="refresh_button">Reinicio</string>
+
+    <!-- basemap menu items -->
+    <string name="StreetMapMenu">Streets</string>
+    <string name="TopoMenu">Topographic</string>
+    <string name="GrayMenu">Gray</string>
+    <string name="OceanMenu">Oceans</string>
+
+    <string-array name="countries">
+        <item>India</item>
+        <item>Pakistan</item>
+        <item>Sri Lanka</item>
+        <item>China</item>
+        <item>Bangladesh</item>
+        <item>Nepal</item>
+        <item>Afghanistan</item>
+        <item>North Korea</item>
+        <item>South Korea</item>
+        <item>Japan</item>
+    </string-array>
+
+    <!-- Lista de titulos de navegacion-->
+    <string-array name="nav_options">
+        <item>Home</item>
+        <item>Perfil</item>
+        <item>Favoritos</item>
+        <item>Eventos</item>
+        <item>Lugares</item>
+        <item>Etiquetas</item>
+        <item>Configuración</item>
+        <item>Compartir</item>
+        <item>South Korea</item>
+        <item>Japan</item>
+    </string-array>
+
+    <string-array name="place_type">
+        <item>airport</item>
+        <item>atm</item>
+        <item>bank</item>
+        <item>bus_station</item>
+        <item>church</item>
+        <item>doctor</item>
+        <item>hospital</item>
+        <item>mosque</item>
+        <item>movie_theater</item>
+        <item>hindu_temple</item>
+        <item>restaurant</item>
+    </string-array>
+
+    <string-array name="place_type_name">
+        <item>Airport</item>
+        <item>ATM</item>
+        <item>Bank</item>
+        <item>Bus Station</item>
+        <item>Church</item>
+        <item>Doctor</item>
+        <item>Hospital</item>
+        <item>Mosque</item>
+        <item>Movie Theater</item>
+        <item>Hindu Temple</item>
+        <item>Restaurant</item>
+    </string-array>
+
+
+</resources>
