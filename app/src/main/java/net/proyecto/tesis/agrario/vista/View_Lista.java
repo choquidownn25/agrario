@@ -79,8 +79,8 @@ public class View_Lista extends Activity implements OnClickListener {
                         texto_inferior_entrada.setText(((Lista_entrada) entrada).getTextoDebajo());
 
                     ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen);
-                    if (imagen_entrada != null)
-                        imagen_entrada.setImageResource(((Lista_entrada) entrada).getIdImagen());
+                    //if (imagen_entrada != null)
+                    //    imagen_entrada.setImageResource(((Lista_entrada) entrada).getIdImagen());
                 }
 
             }

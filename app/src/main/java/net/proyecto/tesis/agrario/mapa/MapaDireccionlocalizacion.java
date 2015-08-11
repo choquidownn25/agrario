@@ -279,8 +279,8 @@ public class MapaDireccionlocalizacion extends FragmentActivity implements Locat
 
                 // Adición de todos los puntos de la ruta a Opciones de línea
                 lineOptions.addAll(points);
-                lineOptions.width(2);
-                lineOptions.color(Color.RED);
+                lineOptions.width(4);
+                lineOptions.color(Color.BLUE);
             }
 
             // Dibujo polilínea en el mapa de Google para la ruta de orden i

@@ -4,10 +4,6 @@ package net.proyecto.tesis.agrario;
  * Created by choqu_000 on 17/04/2015.
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,20 +12,24 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import net.proyecto.tesis.agrario.dispositivos.webcam.WebCam;
+import net.proyecto.tesis.agrario.mapa_arcgis.Identify;
 import net.proyecto.tesis.agrario.mapa_arcgis.Mapa_Prueba_Base;
+import net.proyecto.tesis.agrario.vista.Tabs;
 import net.proyecto.tesis.agrario.vista.View_Lista;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
     int mPosition = -1;
@@ -169,7 +169,8 @@ public class MainActivity extends ActionBarActivity {
         Fragment fragment = null;
         switch (position) {
             case 1:
-                fragment = new Prueba();
+                //fragment = new Prueba();
+                subcargaPruebaVista();
                 break;
             case 2:
                 subCarga();
@@ -181,6 +182,14 @@ public class MainActivity extends ActionBarActivity {
 
             case 4:
                 subcargaCamara();
+                break;
+
+            case 5:
+                subcargaIdentifale();
+                break;
+
+            case 6:
+                sucargaForm();
                 break;
             default:
                 //si no esta la opcion mostrara un toast y nos mandara a Home
@@ -204,6 +213,16 @@ public class MainActivity extends ActionBarActivity {
         Intent intent = new Intent(MainActivity.this, WebCam.class);
         startActivity(intent);
     }
+
+    private void sucargaForm(){
+        Intent intent = new Intent(MainActivity.this, Tabs.class);
+        startActivity(intent);
+    }
+    //metodo para cargar la camara
+    private void  subcargaPruebaVista(){
+        //Intent intent = new Intent(MainActivity.this, VistaFormularioEjecucion.class);
+        //startActivity(intent);
+    }
     private void subCarga(){
 
         Intent intent = new Intent(MainActivity.this, View_Lista.class);
@@ -212,6 +231,11 @@ public class MainActivity extends ActionBarActivity {
 
     private void subArcgisCarga(){
         Intent intent = new Intent(MainActivity.this, Mapa_Prueba_Base.class);
+        startActivity(intent);
+    }
+
+    private void subcargaIdentifale(){
+        Intent intent = new Intent(MainActivity.this, Identify.class);
         startActivity(intent);
     }
 
