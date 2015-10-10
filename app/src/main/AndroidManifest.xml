@@ -16,6 +16,14 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-feature android:name="android.hardware.touchscreen" android:required="true" /><!-- always list hardware required to prevent user errors and bad comments -->
 
+    <uses-permission android:name="restaurantandroid.comsats.com.loguin.permission.C2D_MESSAGE" />
+
+    <!-- This app has permission to register and receive data message. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+
+    <!-- Permission to vibrate -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -36,7 +44,12 @@
         <activity android:name=".validacion.Loguin" android:label="@string/app_name"></activity>
 
         <activity android:name=".MainActivity" android:label="@string/app_name"></activity>
-
+        <activity android:name=".mapa_arcgis.FeatureServiceTableQueryActivity"
+            android:label="@string/app_name"></activity>
+        <activity android:name=".mapa_arcgis.MapaQuery" android:label="@string/app_name"
+            ></activity>
+        <activity android:name=".mapa_arcgis.AttributeQuery" android:label="@string/app_name"></activity>
+        <activity android:name=".mapa_arcgis.Viewshed" android:label="@string/app_name"></activity>
         <activity android:name=".mapa.MapaPrueba" android:label="@string/app_name"></activity>
         <activity android:name=".vista.View_Lista" android:label="@string/app_name"></activity>
         <activity android:name=".vista.Tabs" android:label="@string/app_name"></activity>
@@ -44,8 +57,16 @@
         <activity android:name=".mapa.MapaJsonLugarGeocode" android:label="@string/app_name"></activity>
         <activity android:name=".mapa.MapaDireccionlocalizacion" android:label="@string/app_name"></activity>
         <activity android:name=".mapa_arcgis.Mapa_Prueba_Base" android:label="@string/app_name"></activity>
+        <activity android:name=".mapa_arcgis.MapaIdentify" android:label="@string/app_name"></activity>
         <activity android:name=".dispositivos.webcam.WebCam" android:label="@string/app_name"></activity>
         <activity android:name=".mapa_arcgis.Identify" android:label="@string/app_name"></activity>
+        <activity android:name=".tematica.LecturaSensor" android:label="@string/app_name"></activity>
+        <activity android:name=".mapa_arcgis.ClassBreaksRendererActivity" android:label="@string/app_name"></activity>
+        <activity android:name=".modelo.LecturaModelo" android:label="@string/app_name"></activity>
+
+        <!-- Registro del BroadcastReceiver-->
+
+
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBi_x1gT2z7XPabWiW5JFXXxJPdiKYSQi8"/>

@@ -1,16 +1,5 @@
 package net.proyecto.tesis.agrario.mapa_arcgis;
 
-/**
- * Created by choqu_000 on 19/04/2015.
- *
- * Esta muestra permite al usuario identificar los datos en base a un solo toque y ver la   
- * resultados en una ventana de llamada que tiene una ruleta en su diseño.
- * Asimismo el usuario  puede seleccionar cualquiera de los resultados mostrados y ver sus detalles.
- * Los detalles son los valores de los atributos.
- * El valor de salida se muestra en la ruleta es el campo de visualización.
- *
- */
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -21,7 +10,6 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,7 +18,7 @@ import com.esri.android.action.IdentifyResultSpinner;
 import com.esri.android.action.IdentifyResultSpinnerAdapter;
 import com.esri.android.map.Callout;
 import com.esri.android.map.MapView;
-import com.esri.android.map.ags.ArcGISTiledMapServiceLayer;
+import com.esri.android.map.ags.ArcGISDynamicMapServiceLayer;
 import com.esri.android.map.event.OnSingleTapListener;
 import com.esri.core.geometry.Envelope;
 import com.esri.core.geometry.Point;
@@ -44,34 +32,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Identify extends Activity {
+/**
+ * Created by choqu_000 on 18/09/2015.
+ */
+public class MapaIdentify extends Activity {
 
-    //Atibutos
-    // crear objetos de ArcGIS
+
+    // create ArcGIS objects
     MapView mMapView = null;
     IdentifyParameters params = null;
 
-    // crear objetos de interfaz de usuario
+    // create UI objects
     static ProgressDialog dialog;
 
-    /** Se llama cuando se creó por primera vez la actividad. */
-    public void onCreator(Bundle saveIstanceStated){
-        super.onCreate(saveIstanceStated);
-        setContentView(R.layout.activityindentifile);
-        //Recuperar el mapa y la extensión inicial de diseño XML
-        mMapView = (MapView) findViewById(R.id.map);
-        // añadir capa demográfica al mapa
-        mMapView.addLayer(new ArcGISTiledMapServiceLayer(this.getResources()
-                .getString(R.string.identify_task_url_for_avghouseholdsize)));
+    public  void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.mainintifica);
+        mMapView=(MapView)findViewById(R.id.map);
+        mMapView.addLayer(new ArcGISDynamicMapServiceLayer(this.getResources()
+        .getString(R.string.identify_task_url_for_avghouseholdsize)));
 
-        //Establecer Identificar parámetros
+        // set Identify Parameters
         params = new IdentifyParameters();
         params.setTolerance(20);
         params.setDPI(98);
-        params.setLayers(new int[] { 4 });
+        params.setLayers(new int[]{4});
         params.setLayerMode(IdentifyParameters.ALL_LAYERS);
 
-        //Identificar el solo toque en el mapa
+        // Identify on single tap of map
         mMapView.setOnSingleTapListener(new OnSingleTapListener() {
 
             private static final long serialVersionUID = 1L;
@@ -103,9 +91,8 @@ public class Identify extends Activity {
             }
 
         });
-
-
     }
+
 
     private ViewGroup createIdentifyContent(final List<IdentifyResult> results) {
 
@@ -113,8 +100,8 @@ public class Identify extends Activity {
         LinearLayout layout = new LinearLayout(this);
 
         // view height and widthwrap content
-        layout.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT));
+        layout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
 
         // default orientation
         layout.setOrientation(LinearLayout.HORIZONTAL);
@@ -129,22 +116,15 @@ public class Identify extends Activity {
         // MyIdentifyAdapter creates a bridge between spinner and it's data
         MyIdentifyAdapter adapter = new MyIdentifyAdapter(this, results);
         spinner.setAdapter(adapter);
-        spinner.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-                LayoutParams.WRAP_CONTENT));
+        spinner.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
         layout.addView(spinner);
 
         return layout;
     }
 
-    /**
-     * This class allows the user to customize the string shown in the callout.
-     * By default its the display field name.
-     *
-     * A spinner adapter defines two different views; one that shows the data in
-     * the spinner itself and one that shows the data in the drop down list when
-     * spinner is pressed.
-     *
-     */
+
+
     public class MyIdentifyAdapter extends IdentifyResultSpinnerAdapter {
         String m_show = null;
         List<IdentifyResult> resultList;
@@ -171,7 +151,7 @@ public class Identify extends Activity {
 
             if (curResult.getAttributes().containsKey(
                     res.getString(R.string.NAME))) {
-                outputVal.append("Place: "
+                outputVal.append("Lugar: "
                         + curResult.getAttributes()
                         .get(res.getString(R.string.NAME)).toString());
                 outputVal.append(LSP);
@@ -187,7 +167,7 @@ public class Identify extends Activity {
 
             if (curResult.getAttributes().containsKey(
                     res.getString(R.string.ST_ABBREV))) {
-                outputVal.append("Abbreviation: "
+                outputVal.append("Abv: "
                         + curResult.getAttributes()
                         .get(res.getString(R.string.ST_ABBREV))
                         .toString());
@@ -196,7 +176,7 @@ public class Identify extends Activity {
 
             if (curResult.getAttributes().containsKey(
                     res.getString(R.string.TOTPOP_CY))) {
-                outputVal.append("Population: "
+                outputVal.append("Poblacion: "
                         + curResult.getAttributes()
                         .get(res.getString(R.string.TOTPOP_CY))
                         .toString());
@@ -220,7 +200,7 @@ public class Identify extends Activity {
             txtView.setText(outputVal);
             txtView.setTextColor(Color.BLACK);
             txtView.setLayoutParams(new ListView.LayoutParams(
-                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             txtView.setGravity(Gravity.CENTER_VERTICAL);
 
             return txtView;
@@ -230,19 +210,19 @@ public class Identify extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-    //    mMapView.pause();
+        mMapView.pause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        mMapView.unpause();
+        mMapView.unpause();
     }
 
     private class MyIdentifyTask extends
             AsyncTask<IdentifyParameters, Void, IdentifyResult[]> {
 
-        IdentifyTask task = new IdentifyTask(Identify.this.getResources()
+        IdentifyTask task = new IdentifyTask(MapaIdentify.this.getResources()
                 .getString(R.string.identify_task_url_for_avghouseholdsize));
 
         IdentifyResult[] M_Result;
@@ -256,7 +236,7 @@ public class Identify extends Activity {
         @Override
         protected void onPreExecute() {
             // create dialog while working off UI thread
-            dialog = ProgressDialog.show(Identify.this, "Identify Task",
+            dialog = ProgressDialog.show(MapaIdentify.this, "Identify Task",
                     "Identify query ...");
 
         }
@@ -311,5 +291,6 @@ public class Identify extends Activity {
 
         }
     }
+
 
 }

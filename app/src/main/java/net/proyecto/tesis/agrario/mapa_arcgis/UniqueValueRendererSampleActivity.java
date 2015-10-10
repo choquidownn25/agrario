@@ -1,16 +1,5 @@
 package net.proyecto.tesis.agrario.mapa_arcgis;
 
-/**
- * Created by choqu_000 on 19/04/2015.
- *
- * Esta muestra permite al usuario identificar los datos en base a un solo toque y ver la   
- * resultados en una ventana de llamada que tiene una ruleta en su diseño.
- * Asimismo el usuario  puede seleccionar cualquiera de los resultados mostrados y ver sus detalles.
- * Los detalles son los valores de los atributos.
- * El valor de salida se muestra en la ruleta es el campo de visualización.
- *
- */
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -21,19 +10,25 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.esri.android.action.IdentifyResultSpinner;
 import com.esri.android.action.IdentifyResultSpinnerAdapter;
 import com.esri.android.map.Callout;
+import com.esri.android.map.GraphicsLayer;
 import com.esri.android.map.MapView;
-import com.esri.android.map.ags.ArcGISTiledMapServiceLayer;
+import com.esri.android.map.ags.ArcGISFeatureLayer;
 import com.esri.android.map.event.OnSingleTapListener;
+import com.esri.android.map.event.OnStatusChangedListener;
 import com.esri.core.geometry.Envelope;
 import com.esri.core.geometry.Point;
+import com.esri.core.map.Graphic;
+import com.esri.core.renderer.UniqueValue;
+import com.esri.core.renderer.UniqueValueRenderer;
+import com.esri.core.symbol.SimpleFillSymbol;
 import com.esri.core.tasks.identify.IdentifyParameters;
 import com.esri.core.tasks.identify.IdentifyResult;
 import com.esri.core.tasks.identify.IdentifyTask;
@@ -44,40 +39,172 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Identify extends Activity {
+/**
+ * Created by choqu_000 on 07/10/2015.
+ */
+public class UniqueValueRendererSampleActivity extends Activity {
 
-    //Atibutos
-    // crear objetos de ArcGIS
+    //Atributos
     MapView mMapView = null;
-    IdentifyParameters params = null;
+    GraphicsLayer graphicsLayer = null;
+    Graphic fillGraphic = null;
 
-    // crear objetos de interfaz de usuario
+    boolean boolQuery = true;
+    ProgressDialog progress;
+    IdentifyParameters params = null;
+    Callout callout = null;
+
+    // UniqueValueRenderer used to assign unique values to feature
+    UniqueValueRenderer uvrenderer = null;
+
+    // Unique Values are objects containing the unique properties
+    UniqueValue uv1, uv2, uv3, uv4, uv5, uv6, uv7, uv8, uv9;
+
+    // Rendering Type which is used to fill the region
+    SimpleFillSymbol defaultsymbol = null;
+
+    // The set of unique attributes for rendering
+    String[] uniqueAttribute1 = new String[1];
+    String[] uniqueAttribute2 = new String[1];
+    String[] uniqueAttribute3 = new String[1];
+    String[] uniqueAttribute4 = new String[1];
+    String[] uniqueAttribute5 = new String[1];
+    String[] uniqueAttribute6 = new String[1];
+    String[] uniqueAttribute7 = new String[1];
+    String[] uniqueAttribute8 = new String[1];
+    String[] uniqueAttribute9 = new String[1];
+
+    // create UI objects
     static ProgressDialog dialog;
 
-    /** Se llama cuando se creó por primera vez la actividad. */
-    public void onCreator(Bundle saveIstanceStated){
-        super.onCreate(saveIstanceStated);
-        setContentView(R.layout.activityindentifile);
-        //Recuperar el mapa y la extensión inicial de diseño XML
-        mMapView = (MapView) findViewById(R.id.map);
-        // añadir capa demográfica al mapa
-        mMapView.addLayer(new ArcGISTiledMapServiceLayer(this.getResources()
-                .getString(R.string.identify_task_url_for_avghouseholdsize)));
+    protected void onCreate(Bundle saveInstateState){
+        super.onCreate(saveInstateState);
+        setContentView(R.layout.mapa_unique);
 
-        //Establecer Identificar parámetros
+        final ArcGISFeatureLayer feature = new ArcGISFeatureLayer(
+                this.getResources().getString(R.string.states_URL),
+                ArcGISFeatureLayer.MODE.SNAPSHOT
+        );
+
+
+        uvrenderer = new UniqueValueRenderer();
+
+        // setting the field for the unique values
+        uvrenderer.setField1("SUB_REGION");
+
+        uv1 = new UniqueValue();
+        uv2 = new UniqueValue();
+        uv3 = new UniqueValue();
+        uv4 = new UniqueValue();
+        uv5 = new UniqueValue();
+        uv6 = new UniqueValue();
+        uv7 = new UniqueValue();
+        uv8 = new UniqueValue();
+        uv9 = new UniqueValue();
+
+        Resources res = getResources();
+
+        // Defining the Unique attributes for classifier
+        uniqueAttribute1[0] = res.getString(R.string.Mtn);
+        uv1.setDescription(res.getString(R.string.Mtn));
+        uv1.setValue(uniqueAttribute1);
+
+        uniqueAttribute2[0] = res.getString(R.string.Pacific);
+        uv2.setDescription(res.getString(R.string.Pacific));
+        uv2.setValue(uniqueAttribute2);
+
+        uniqueAttribute3[0] = res.getString(R.string.N_Eng);
+        uv3.setDescription(res.getString(R.string.N_Eng));
+        uv3.setValue(uniqueAttribute3);
+
+        uniqueAttribute4[0] = res.getString(R.string.S_Atl);
+        uv4.setDescription(res.getString(R.string.S_Atl));
+        uv4.setValue(uniqueAttribute4);
+
+        uniqueAttribute5[0] = res.getString(R.string.Mid_Atl);
+        uv5.setDescription(res.getString(R.string.Mid_Atl));
+        uv5.setValue(uniqueAttribute5);
+
+        uniqueAttribute6[0] = res.getString(R.string.E_N_Cen);
+        uv6.setDescription(res.getString(R.string.E_N_Cen));
+        uv6.setValue(uniqueAttribute6);
+
+        uniqueAttribute7[0] = res.getString(R.string.W_N_Cen);
+        uv7.setDescription(res.getString(R.string.W_N_Cen));
+        uv7.setValue(uniqueAttribute7);
+
+        uniqueAttribute8[0] = res.getString(R.string.E_S_Cen);
+        uv8.setDescription(res.getString(R.string.E_S_Cen));
+        uv8.setValue(uniqueAttribute8);
+
+        uniqueAttribute9[0] = res.getString(R.string.W_S_Cen);
+        uv9.setDescription(res.getString(R.string.W_S_Cen));
+        uv9.setValue(uniqueAttribute9);
+
+        // The symbol definition for each region
+        final SimpleFillSymbol symbol1 = new SimpleFillSymbol(Color.BLUE);
+        final SimpleFillSymbol symbol2 = new SimpleFillSymbol(Color.CYAN);
+        final SimpleFillSymbol symbol3 = new SimpleFillSymbol(Color.GRAY);
+        final SimpleFillSymbol symbol4 = new SimpleFillSymbol(Color.MAGENTA);
+        final SimpleFillSymbol symbol5 = new SimpleFillSymbol(Color.GREEN);
+        final SimpleFillSymbol symbol6 = new SimpleFillSymbol(Color.RED);
+        final SimpleFillSymbol symbol7 = new SimpleFillSymbol(Color.YELLOW);
+        final SimpleFillSymbol symbol8 = new SimpleFillSymbol(Color.WHITE);
+        final SimpleFillSymbol symbol9 = new SimpleFillSymbol(Color.BLACK);
+
+        // The default symbol
+        defaultsymbol = new SimpleFillSymbol(Color.GREEN);
+
+        // Setting the symbol to the unique values defined
+        uv1.setSymbol(symbol1);
+        uv2.setSymbol(symbol2);
+        uv3.setSymbol(symbol3);
+        uv4.setSymbol(symbol4);
+        uv5.setSymbol(symbol5);
+        uv6.setSymbol(symbol6);
+        uv7.setSymbol(symbol7);
+        uv8.setSymbol(symbol8);
+        uv9.setSymbol(symbol9);
+
+        // Add the unique values to the renderer
+        uvrenderer.setDefaultSymbol(defaultsymbol);
+        uvrenderer.addUniqueValue(uv1);
+        uvrenderer.addUniqueValue(uv2);
+        uvrenderer.addUniqueValue(uv3);
+        uvrenderer.addUniqueValue(uv4);
+        uvrenderer.addUniqueValue(uv5);
+        uvrenderer.addUniqueValue(uv6);
+        uvrenderer.addUniqueValue(uv7);
+        uvrenderer.addUniqueValue(uv8);
+        uvrenderer.addUniqueValue(uv9);
+
+        feature.setRenderer(uvrenderer);
+        feature.setOpacity(0.5f);
+
+        // Add feature to the mapview
+        mMapView.addLayer(feature);
+
+        // set Identify Parameters
         params = new IdentifyParameters();
         params.setTolerance(20);
         params.setDPI(98);
         params.setLayers(new int[] { 4 });
         params.setLayerMode(IdentifyParameters.ALL_LAYERS);
 
-        //Identificar el solo toque en el mapa
+        mMapView.setOnStatusChangedListener(new OnStatusChangedListener() {
+            public void onStatusChanged(final Object source, final STATUS status) {
+
+                if (STATUS.LAYER_LOADED == status) {
+                    if (source instanceof ArcGISFeatureLayer) {
+                        // ArcGISFeatureLayer loaded successfully
+                    }
+                }
+            }
+        });
+
         mMapView.setOnSingleTapListener(new OnSingleTapListener() {
 
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public void onSingleTap(final float x, final float y) {
+            public void onSingleTap(float x, float y) {
 
                 if (!mMapView.isLoaded()) {
                     return;
@@ -85,7 +212,6 @@ public class Identify extends Activity {
 
                 // Add to Identify Parameters based on tapped location
                 Point identifyPoint = mMapView.toMapPoint(x, y);
-
                 params.setGeometry(identifyPoint);
                 params.setSpatialReference(mMapView.getSpatialReference());
                 params.setMapHeight(mMapView.getHeight());
@@ -99,22 +225,32 @@ public class Identify extends Activity {
 
                 // execute the identify task off UI thread
                 MyIdentifyTask mTask = new MyIdentifyTask(identifyPoint);
+
                 mTask.execute(params);
+
             }
-
         });
-
 
     }
 
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    /**
+     * The identity content
+     *
+     * @param results
+     * @return
+     */
     private ViewGroup createIdentifyContent(final List<IdentifyResult> results) {
 
         // create a new LinearLayout in application context
         LinearLayout layout = new LinearLayout(this);
 
         // view height and widthwrap content
-        layout.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT));
+        layout.setLayoutParams(new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT,
+                RadioGroup.LayoutParams.WRAP_CONTENT));
 
         // default orientation
         layout.setOrientation(LinearLayout.HORIZONTAL);
@@ -129,8 +265,8 @@ public class Identify extends Activity {
         // MyIdentifyAdapter creates a bridge between spinner and it's data
         MyIdentifyAdapter adapter = new MyIdentifyAdapter(this, results);
         spinner.setAdapter(adapter);
-        spinner.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-                LayoutParams.WRAP_CONTENT));
+        spinner.setLayoutParams(new RadioGroup.LayoutParams(RadioGroup.LayoutParams.MATCH_PARENT,
+                RadioGroup.LayoutParams.WRAP_CONTENT));
         layout.addView(spinner);
 
         return layout;
@@ -158,7 +294,7 @@ public class Identify extends Activity {
         }
 
         // Get a TextView that displays identify results in the callout.
-        @Override
+
         public View getView(int position, View convertView, ViewGroup parent) {
             String LSP = System.getProperty("line.separator");
             StringBuilder outputVal = new StringBuilder();
@@ -174,23 +310,6 @@ public class Identify extends Activity {
                 outputVal.append("Place: "
                         + curResult.getAttributes()
                         .get(res.getString(R.string.NAME)).toString());
-                outputVal.append(LSP);
-            }
-
-            if (curResult.getAttributes().containsKey(
-                    res.getString(R.string.ID))) {
-                outputVal.append("State ID: "
-                        + curResult.getAttributes()
-                        .get(res.getString(R.string.ID)).toString());
-                outputVal.append(LSP);
-            }
-
-            if (curResult.getAttributes().containsKey(
-                    res.getString(R.string.ST_ABBREV))) {
-                outputVal.append("Abbreviation: "
-                        + curResult.getAttributes()
-                        .get(res.getString(R.string.ST_ABBREV))
-                        .toString());
                 outputVal.append(LSP);
             }
 
@@ -220,7 +339,7 @@ public class Identify extends Activity {
             txtView.setText(outputVal);
             txtView.setTextColor(Color.BLACK);
             txtView.setLayoutParams(new ListView.LayoutParams(
-                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+                    RadioGroup.LayoutParams.MATCH_PARENT, RadioGroup.LayoutParams.WRAP_CONTENT));
             txtView.setGravity(Gravity.CENTER_VERTICAL);
 
             return txtView;
@@ -230,20 +349,26 @@ public class Identify extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-    //    mMapView.pause();
+        mMapView.pause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        mMapView.unpause();
+        mMapView.unpause();
     }
 
+    /**
+     * This class is mainly responsible to carry out the query execute tasks. It
+     * executes in the order of OnPreExecute, DoInBackground and OnPostExecute.
+     *
+     */
     private class MyIdentifyTask extends
             AsyncTask<IdentifyParameters, Void, IdentifyResult[]> {
 
-        IdentifyTask task = new IdentifyTask(Identify.this.getResources()
-                .getString(R.string.identify_task_url_for_avghouseholdsize));
+        IdentifyTask task = new IdentifyTask(
+                UniqueValueRendererSampleActivity.this.getResources()
+                        .getString(R.string.result_URL));
 
         IdentifyResult[] M_Result;
 
@@ -256,27 +381,26 @@ public class Identify extends Activity {
         @Override
         protected void onPreExecute() {
             // create dialog while working off UI thread
-            dialog = ProgressDialog.show(Identify.this, "Identify Task",
-                    "Identify query ...");
+            dialog = ProgressDialog
+                    .show(UniqueValueRendererSampleActivity.this,
+                            "Identifying the Region",
+                            "Please wait for the results ...");
 
         }
 
         protected IdentifyResult[] doInBackground(IdentifyParameters... params) {
-
             // check that you have the identify parameters
             if (params != null && params.length > 0) {
                 IdentifyParameters mParams = params[0];
 
                 try {
                     // Run IdentifyTask with Identify Parameters
-
                     M_Result = task.execute(mParams);
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-
             return M_Result;
         }
 
@@ -303,13 +427,14 @@ public class Identify extends Activity {
                     }
                 }
             }
-
-            Callout callout = mMapView.getCallout();
-            callout.setContent(createIdentifyContent(resultList));
-            callout.show(mAnchor);
-
+            // Create callout from MapView
+            Callout mapCallout = mMapView.getCallout();
+            mapCallout.setCoordinates(mAnchor);
+            // populate callout with results from IdentifyTask
+            mapCallout.setContent(createIdentifyContent(resultList));
+            // show callout
+            mapCallout.show();
 
         }
     }
-
 }

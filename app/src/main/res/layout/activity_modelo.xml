@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#ABBDD0"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
+
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="329dp"
+        android:layout_height="48dp"
+        android:gravity="center_vertical|center_horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Numero :  "
+            android:id="@+id/id_orden_servicio"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+
+            android:padding="1dip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Small Text"
+            android:id="@+id/textViewnumerodetalleafro"
+            android:width="@dimen/abc_alert_dialog_button_bar_height"
+            android:layout_gravity="right"
+            android:singleLine="false" />
+
+
+
+        <ImageButton
+            android:id="@+id/menos"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#ABBDD0"
+            android:src="@android:drawable/btn_minus"
+            android:contentDescription="@string/app_name"
+            android:textAlignment="center"/>
+
+        <ImageButton
+            android:id="@+id/mas"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="#ABBDD0"
+            android:src="@android:drawable/btn_plus"
+            android:contentDescription="@string/app_name"
+
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal">
+
+        <ScrollView android:id="@+id/login_form" android:layout_width="match_parent"
+            android:layout_height="265dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout android:id="@+id/email_login_form" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:orientation="vertical">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="DRP"
+                        android:id="@+id/textView4"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_column="0"
+                        android:padding="5dip" />
+
+
+                    <EditText  android:id="@+id/textViewDPR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/action_ano"
+                        android:imeActionLabel="@string/action_sign_in"
+                        android:imeOptions="actionUnspecified"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:layout_marginBottom="10dp"
+                        android:textColorHint="#ffffffff"
+                        android:textColor="#ffffffff">
+                    </EditText>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Perimetro Mojado"
+                        android:id="@+id/textView"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_column="0"
+                        android:padding="3dip"  />
+
+                    <EditText  android:id="@+id/textViewPerimetro_Mojado"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/action_mes"
+                        android:imeActionLabel="@string/action_sign_in"
+                        android:imeOptions="actionUnspecified"
+                        android:maxLines="1" android:singleLine="true"
+                        android:layout_marginBottom="10dp"
+                        android:textColorHint="#ffffffff"
+                        android:textColor="#ffffffff">
+                    </EditText>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Radio_Hidraulico"
+                        android:id="@+id/textView6"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_column="0"
+                        android:padding="5dip"/>
+
+                    <EditText android:id="@+id/textViewRadio_Hidraulico"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/action_dia"
+                        android:imeActionLabel="@string/action_sign_in"
+                        android:imeOptions="actionUnspecified"
+                        android:maxLines="1" android:singleLine="true"
+                        android:layout_marginBottom="10dp"
+                        android:textColorHint="#ffffffff"
+                        android:textColor="#ffffffff">
+                    </EditText>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="R dos sobre tres"
+                        android:id="@+id/textView8"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_column="0"
+                        android:padding="5dip"/>
+
+                    <EditText android:id="@+id/textViewRdossobretres"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/action_hora"
+                        android:imeActionLabel="@string/action_sign_in"
+                        android:imeOptions="actionUnspecified"
+                        android:maxLines="1" android:singleLine="true"
+                        android:layout_marginBottom="10dp"
+                        android:textColorHint="#ffffffff"
+                        android:textColor="#ffffffff">
+                    </EditText>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="I/n"
+                        android:id="@+id/textView10"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_column="0"
+                        android:padding="5dip" />
+
+                    <EditText android:id="@+id/textViewisobren"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/action_humedad"
+                        android:imeActionLabel="@string/action_sign_in"
+                        android:imeOptions="actionUnspecified"
+                        android:maxLines="1" android:singleLine="true"
+                        android:layout_marginBottom="10dp"
+                        android:textColorHint="#ffffffff"
+                        android:textColor="#ffffffff">
+                    </EditText>
+
+
+                    <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="PT"
+                    android:id="@+id/textView13"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_column="0"
+                    android:padding="5dip" />
+
+                    <EditText android:id="@+id/textViewPt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/action_temperatura"
+                        android:imeActionLabel="@string/action_sign_in"
+                        android:imeOptions="actionUnspecified"
+                        android:maxLines="1" android:singleLine="true"
+                        android:layout_marginBottom="10dp"
+                        android:textColorHint="#ffffffff"
+                        android:textColor="#ffffffff">
+                    </EditText>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Anchos"
+                        android:id="@+id/textView14"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_column="0"
+                        android:padding="5dip" />
+
+                    <EditText android:id="@+id/textViewAnchos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/action_temperatura"
+                        android:imeActionLabel="@string/action_sign_in"
+                        android:imeOptions="actionUnspecified"
+                        android:maxLines="1" android:singleLine="true"
+                        android:layout_marginBottom="10dp"
+                        android:textColorHint="#ffffffff"
+                        android:textColor="#ffffffff">
+                    </EditText>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Areas"
+                        android:id="@+id/textView15"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_column="0"
+                        android:padding="5dip" />
+
+                    <EditText android:id="@+id/textViewAreas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/action_temperatura"
+                        android:imeActionLabel="@string/action_sign_in"
+                        android:imeOptions="actionUnspecified"
+                        android:maxLines="1" android:singleLine="true"
+                        android:layout_marginBottom="10dp"
+                        android:textColorHint="#ffffffff"
+                        android:textColor="#ffffffff">
+                    </EditText>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Caudales"
+                        android:id="@+id/textView16"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_column="0"
+                        android:padding="5dip" />
+
+                    <EditText android:id="@+id/textViewCaudales"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/action_temperatura"
+                        android:imeActionLabel="@string/action_sign_in"
+                        android:imeOptions="actionUnspecified"
+                        android:maxLines="1" android:singleLine="true"
+                        android:layout_marginBottom="10dp"
+                        android:textColorHint="#ffffffff"
+                        android:textColor="#ffffffff">
+                    </EditText>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Velocidad Media Promedia"
+                        android:id="@+id/textView17"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_column="0"
+                        android:padding="5dip" />
+
+                    <EditText android:id="@+id/textViewVmv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/action_temperatura"
+                        android:imeActionLabel="@string/action_sign_in"
+                        android:imeOptions="actionUnspecified"
+                        android:maxLines="1" android:singleLine="true"
+                        android:layout_marginBottom="10dp"
+                        android:textColorHint="#ffffffff"
+                        android:textColor="#ffffffff">
+                    </EditText>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Porcentaje Profundidad Media"
+                        android:id="@+id/textView18"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_column="0"
+                        android:padding="5dip" />
+
+                    <EditText android:id="@+id/textViewporcentajeprofundidadmedia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/action_temperatura"
+                        android:imeActionLabel="@string/action_sign_in"
+                        android:imeOptions="actionUnspecified"
+                        android:maxLines="1" android:singleLine="true"
+                        android:layout_marginBottom="10dp"
+                        android:textColorHint="#ffffffff"
+                        android:textColor="#ffffffff">
+                    </EditText>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Codigo Aforo"
+                        android:id="@+id/textView19"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_column="0"
+                        android:padding="5dip" />
+
+                    <EditText android:id="@+id/textViewCodAforo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/action_temperatura"
+                        android:imeActionLabel="@string/action_sign_in"
+                        android:imeOptions="actionUnspecified"
+                        android:maxLines="1" android:singleLine="true"
+                        android:layout_marginBottom="10dp"
+                        android:textColorHint="#ffffffff"
+                        android:textColor="#ffffffff">
+                    </EditText>
+
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+</LinearLayout>

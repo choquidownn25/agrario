@@ -22,8 +22,10 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import net.proyecto.tesis.agrario.dispositivos.webcam.WebCam;
-import net.proyecto.tesis.agrario.mapa_arcgis.Identify;
+import net.proyecto.tesis.agrario.mapa_arcgis.MapaIdentify;
 import net.proyecto.tesis.agrario.mapa_arcgis.Mapa_Prueba_Base;
+import net.proyecto.tesis.agrario.modelo.LecturaModelo;
+import net.proyecto.tesis.agrario.tematica.LecturaSensor;
 import net.proyecto.tesis.agrario.vista.Tabs;
 import net.proyecto.tesis.agrario.vista.View_Lista;
 
@@ -34,6 +36,7 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
     int mPosition = -1;
     String mTitle = "";
+    private static final int ALARM_REQUEST_CODE = 1;
 
     // Array of strings storing country names
     String[] mCountries ;
@@ -160,7 +163,10 @@ public class MainActivity extends ActionBarActivity {
         // Setting the adapter to the listView
         mDrawerList.setAdapter(mAdapter);
 
+        //establecerAlarmaClick(1200);
+
     }
+
 
 
     /*Pasando la posicion de la opcion en el menu nos mostrara el Fragment correspondiente*/
@@ -170,7 +176,7 @@ public class MainActivity extends ActionBarActivity {
         switch (position) {
             case 1:
                 //fragment = new Prueba();
-                subcargaPruebaVista();
+                subCargaSensorRabian();
                 break;
             case 2:
                 subCarga();
@@ -191,6 +197,13 @@ public class MainActivity extends ActionBarActivity {
             case 6:
                 sucargaForm();
                 break;
+            case 7:
+                subCargaSensorRabian();
+                break;
+
+            case 8:
+                subCargarModelo();
+                break;
             default:
                 //si no esta la opcion mostrara un toast y nos mandara a Home
                 Toast.makeText(getApplicationContext(), "Opcion " + titulos[position - 1] + "no disponible!", Toast.LENGTH_SHORT).show();
@@ -199,7 +212,7 @@ public class MainActivity extends ActionBarActivity {
                 break;
         }
         //Validamos si el fragment no es nulo
-        if(position > 11) { // Show fragment for countries : 0 to 4
+        if(position > 15) { // Show fragment for countries : 0 to 4
             //showFragment(position);
             //subCarga();
             Toast.makeText(getApplicationContext(), mCountries[position], Toast.LENGTH_LONG).show();
@@ -208,6 +221,17 @@ public class MainActivity extends ActionBarActivity {
         //    Toast.makeText(getApplicationContext(), mCountries[position], Toast.LENGTH_LONG).show();
         //}
     }
+
+    private  void  subCargarModelo(){
+        Intent intent = new Intent(MainActivity.this, LecturaModelo.class);
+        startActivity(intent);
+    }
+
+    private void subCargaSensorRabian(){
+        Intent intent = new Intent(MainActivity.this, LecturaSensor.class);
+        startActivity(intent);
+    }
+
     //metodo para cargar la camara
     private void  subcargaCamara(){
         Intent intent = new Intent(MainActivity.this, WebCam.class);
@@ -235,7 +259,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void subcargaIdentifale(){
-        Intent intent = new Intent(MainActivity.this, Identify.class);
+        Intent intent = new Intent(MainActivity.this, MapaIdentify.class);
         startActivity(intent);
     }
 

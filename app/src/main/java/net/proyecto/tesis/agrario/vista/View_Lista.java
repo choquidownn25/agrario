@@ -5,43 +5,39 @@ package net.proyecto.tesis.agrario.vista;
  * Se crea clase para la vista del list view a mustrar en nuestos mapas
  *
  */
+
 import android.app.Activity;
-import android.app.ExpandableListActivity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.view.View.OnClickListener;
 
-//import com.example.jose_antonio_sarria.slidenavigation.MainActivity;
-import net.proyecto.tesis.agrario.MainActivity;
-//import com.example.jose_antonio_sarria.slidenavigation.R;
-//import com.example.choqu_000.googlemaps.R;
+import net.proyecto.tesis.agrario.R;
 import net.proyecto.tesis.agrario.listas.Lista_adaptador;
 import net.proyecto.tesis.agrario.listas.Lista_entrada;
-//import com.example.choqu_000.googlemaps.listas.Lista_adaptador;
-import net.proyecto.tesis.agrario.mapa.MapaAnalisisdelLugar;
 import net.proyecto.tesis.agrario.mapa.MapaDireccionlocalizacion;
 import net.proyecto.tesis.agrario.mapa.MapaJsonLugarGeocode;
 import net.proyecto.tesis.agrario.mapa.MapaPrueba;
-//import com.example.jose_antonio_sarria.slidenavigation.mapa.MapaJsonLugares;
-//import com.example.jose_antonio_sarria.slidenavigation.modelo.MiAdatadorExpandible;
-
-
-import net.proyecto.tesis.agrario.R;
+import net.proyecto.tesis.agrario.mapa_arcgis.AttributeQuery;
+import net.proyecto.tesis.agrario.mapa_arcgis.ClassBreaksRendererActivity;
+import net.proyecto.tesis.agrario.mapa_arcgis.FeatureServiceTableQueryActivity;
+import net.proyecto.tesis.agrario.mapa_arcgis.MapaQuery;
+import net.proyecto.tesis.agrario.mapa_arcgis.Viewshed;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+
+//import com.example.jose_antonio_sarria.slidenavigation.MainActivity;
+//import com.example.jose_antonio_sarria.slidenavigation.R;
+//import com.example.choqu_000.googlemaps.R;
+//import com.example.choqu_000.googlemaps.listas.Lista_adaptador;
+//import com.example.jose_antonio_sarria.slidenavigation.mapa.MapaJsonLugares;
+//import com.example.jose_antonio_sarria.slidenavigation.modelo.MiAdatadorExpandible;
 //import com.example.jose_antonio_sarria.slidenavigation.serviciogoogle.DetalleLugarActivity;
 
 //public class View_Lista  extends ExpandableListActivity implements OnClickListener {
@@ -56,7 +52,7 @@ public class View_Lista extends Activity implements OnClickListener {
 
         final ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();
 
-        datos.add(new Lista_entrada(R.drawable.imagendecolombia, "Google Maps Version 2", "Google Maps Vercion 2."));
+        datos.add(new Lista_entrada(R.drawable.imagendecolombia, "GPS", "Google Maps Vercion 2."));
         datos.add(new Lista_entrada(R.drawable.imagencolombia2, "Mapa Base", "Mapa base del sistema."));
         datos.add(new Lista_entrada(R.drawable.imagencolombia3, "Servicio de Busqueda", "Servicio de Busqueda."));
         datos.add(new Lista_entrada(R.drawable.imagencolombia44, "Ruta", "Ruta mas corta."));
@@ -92,8 +88,11 @@ public class View_Lista extends Activity implements OnClickListener {
                 Lista_entrada elegido = (Lista_entrada) pariente.getItemAtPosition(posicion);
 
                 switch (posicion) {
+                    case 0 :
+                        subCargaUni();
+                        break;
                     case 1 :
-                        onClick(view);
+                        subMapaDireccioneslocalizadas();
                         break;
                     case 2:
                         subMapaDireccionLocalizacion();
@@ -101,6 +100,21 @@ public class View_Lista extends Activity implements OnClickListener {
 
                     case 3:
                         subMapaDireccioneslocalizadas();
+                        break;
+
+                    case 4:
+                        subCargaFeature();
+                        break;
+
+                    case 5:
+                        subCargaMapaEsriQ();
+                        break;
+
+                    case 6:
+                        subCargaQuery();
+                        break;
+                    case 7:
+                        subCargaVientos();
                         break;
                     default:
                         //si no esta la opcion mostrara un toast y nos mandara a Home
@@ -111,6 +125,8 @@ public class View_Lista extends Activity implements OnClickListener {
                         break;
                 }
             }
+
+
         });
     }
 
@@ -119,6 +135,12 @@ public class View_Lista extends Activity implements OnClickListener {
         Intent intent = new Intent(View_Lista.this, MapaPrueba.class);
         startActivity(intent);
     }
+//CArga el metodo del mnewapa
+    private void subCargaFeature() {
+        Intent intent = new Intent(View_Lista.this, FeatureServiceTableQueryActivity.class);
+        startActivity(intent);
+    }
+
 
     public void subMapaDireccionLocalizacion(){
         Intent intent = new Intent(View_Lista.this, MapaJsonLugarGeocode.class);
@@ -130,4 +152,25 @@ public class View_Lista extends Activity implements OnClickListener {
         startActivity(intent);
     }
 
+
+    public void subCargaMapaEsriQ(){
+        Intent intent = new Intent(View_Lista.this, MapaQuery.class);
+        startActivity(intent);
+    }
+
+    public void subCargaUni(){
+        Intent intent = new Intent(View_Lista.this, Viewshed.class);
+        startActivity(intent);
+    }
+
+    public void subCargaQuery(){
+        Intent intent = new Intent(View_Lista.this, AttributeQuery.class);
+        startActivity(intent);
+    }
+
+    public void subCargaVientos(){
+        Intent intent = new Intent(View_Lista.this, ClassBreaksRendererActivity.class);
+        startActivity(intent);
+
+    }
 }

@@ -2,11 +2,62 @@
 <resources>
 
     <!-- Service URL's  http://190.216.133.37/arcgis/rest/services/Municipios/Planes_Parcial/MapServer-->
-
+    <!--
     <string name="identify_task_url_for_avghouseholdsize">http://190.216.133.37/arcgis/rest/services/Municipios/Planes_Parcial/MapServer</string>
     <string name="identify_task_url_for_populationdensity">http://190.216.133.37/arcgis/rest/services/Municipios/Planes_Parcial/MapServer</string>
+    -->
+
+    <!-- Service URL's -->
+
+    <!-- Service URL's -->
+
+    <string name="identify_task_url_for_avghouseholdsize">http://services.arcgisonline.com/arcgis/rest/services/Demographics/USA_Diversity_Index/MapServer</string>
+    <string name="identify_task_url_for_populationdensity">http://server.arcgisonline.com/arcgis/rest/services/Demographics/USA_Population_Density/MapServer</string>
+
+    <!-- Attributes -->
+    <!-- Service URL -->
+    <string name="query_service">http://services.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Average_Household_Size/MapServer</string>
+
+    <!-- Button strings -->
+    <string name="button_household">Average Household > 3.5</string>
+    <string name="button_reset">Clear Graphics</string>
 
 
+    <!-- na service -->
+    <string name="naservice_url">http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Network/USA/NAServer/Service%20Area</string>
+    <string name="sa_null_response">Service Area Task did not return a result!</string>
+    <string name="route_label">Press and hold map to route to that point\nClick segments for more information</string>
+    <string name="text_break1">Drive Time Minutes</string>
+    <string name="text_break2">Drive Time Minutes</string>
+    <string name="text_break3">Drive Time Minutes</string>
+    <string name="edittext1">1.0</string>
+    <string name="edittext2">2.0</string>
+    <string name="edittext3">3.0</string>
+    <string name="button_text">OK</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="set_breaks">Impedance (Cost Attribute)</string>
+
+    <string name="prompt_password">Password</string>
+    <string name="action_registre">Registrar</string>
+    <string name="invalid_email">This email address is invalid</string>
+    <string name="invalid_password">Password is too short</string>
+    <string name="incorrect_password">Password is incorrect</string>
+    <string name="field_required">This field is required</string>
+    <string name="username">Usuario</string>
+    <string name="password">Password</string>
+    <string name="title_activity_chat">Chat</string>
+
+    <!-- para los datos del sensor -->
+    <string name="action_ano">Año</string>
+    <string name="action_mes">Mes</string>
+    <string name="action_dia">Dia</string>
+    <string name="action_hora">Hora</string>
+    <string name="action_humedad">Humedad</string>
+    <string name="action_temperatura">Temperatura</string>
+
+
+
+    <string name="action_sign_in">Login</string>
     <string name="app_name">Agrisoft</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
@@ -26,12 +77,99 @@
     <string name="ID">ID</string>
     <string name="ST_ABBREV">State Abbreviation</string>
     <string name="TOTPOP_CY">2012 Total Population (Esri)</string>
+    <string name="earthquake_url">http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson</string>
+
+    <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="saved">New feature saved</string>
+    <string name="action_add">Add Feature</string>
+    <string name="action_save">Save</string>
+    <string name="action_discard">Discard</string>
+    <string name="action_delete">Delete Point</string>
+    <string name="action_undo">Undo</string>
+    <string name="title_add_point">Adding a Point</string>
+    <string name="title_add_polyline">Adding a Polyline</string>
+    <string name="title_add_polygon">Adding a Polygon</string>
+    <string name="title_feature_type">Select feature type</string>
+    <string name="title_confirm_discard">Discard new feature</string>
+    <string name="title_edit_failed">Saved failed</string>
+    <string name="msg_confirm_discard">Are you sure you want to discard the feature you were adding?</string>
+
+    <string name="featureServiceURL">http://services.arcgis.com/oKgs2tbjK6zwTdvi/arcgis/rest/services/Major_World_Cities/FeatureServer/0</string>
+
+
+    <!-- query parameters -->
+    <string name="query_us">COUNTRY = US</string>
+    <string name="query_ca">COUNTRY = CANADA</string>
+    <string name="query_fr">COUNTRY = FRANCE</string>
+    <string name="query_au">COUNTRY = AUSTRALIA</string>
+    <string name="query_br">COUNTRY = BRAZIL</string>
 
     <!-- basemap menu items -->
     <string name="StreetMapMenu">Streets</string>
     <string name="TopoMenu">Topographic</string>
     <string name="GrayMenu">Gray</string>
     <string name="OceanMenu">Oceans</string>
+    <string name="okbutton_text">OK</string>
+
+    <string name="states_URL">http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer/1</string>
+    <string name="result_URL">http://services.arcgisonline.com/arcgis/rest/services/Demographics/USA_Diversity_Index/MapServer</string>
+
+    <string name="go_button_text">go</string>
+    <string name="delete_button_text">delete</string>
+    <string name="image_desc">map icons</string>
+    <string name="go">Click to get the Viewshed</string>
+    <string name="delete">Delete</string>
+
+    <string name="SUB_REGION">SUB_REGION</string>
+    <string name="STATE_NAME">STATE_NAME</string>
+    <string name="AREA">AREA</string>
+    <string name="Mtn">Mtn</string>
+    <string name="Pacific">Pacific</string>
+    <string name="N_Eng">N Eng</string>
+    <string name="S_Atl">S Atl</string>
+    <string name="Mid_Atl">Mid Atl</string>
+    <string name="E_N_Cen">E N Cen</string>
+    <string name="W_N_Cen">W N Cen</string>
+    <string name="E_S_Cen">E S Cen</string>
+    <string name="W_S_Cen">W S Cen</string>
+
+    <string name="featurelayer_url">http://tmservices1.esri.com/arcgis/rest/services/LiveFeeds/NOAA_METAR_current_wind_speed_direction/MapServer</string>
+    <string name="station"><b>Estacion: </b></string>
+    <string name="country"><b>Pais: </b></string>
+    <string name="temp"><b>Temperatura: </b></string>
+    <string name="speed"><b>Velocidad: </b></string>
+
+    <string name="tileServiceURL">http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer</string>
+
+    <!-- App UI components -->
+    <string name="line">Line</string>
+    <string name="polygon">Polygon</string>
+    <string name="project">Project</string>
+    <string name="reset">Reset</string>
+    <string name="buffer">Buffer</string>
+    <string name="point">Point</string>
+    <string name="distance_meters">3000m</string>
+    <string name="empty"></string>
+    <string name="distance">Distance</string>
+    <string name="area">Area</string>
+    <string name="plus">+</string>
+    <string name="contains">Contains</string>
+    <string name="crosses">Crosses</string>
+    <string name="equals">Equals</string>
+    <string name="touches">Touches</string>
+    <string name="within">Within</string>
+    <string name="difference">Difference</string>
+    <string name="union">Union</string>
+
+
+    <string-array name="sample_names">
+        <item>Buffer</item>
+        <item>Union and Difference</item>
+        <item>Spatial Relationships</item>
+    </string-array>
+
 
     <string-array name="countries">
         <item>India</item>
@@ -53,11 +191,11 @@
         <item>Mapas</item>
         <item>Mapa Base</item>
         <item>Camara</item>
-        <item>Etiquetas</item>
+        <item>Identificacion</item>
         <item>Configuración</item>
-        <item>Compartir</item>
-        <item>South Korea</item>
-        <item>Japan</item>
+        <item>Sensor</item>
+        <item>Modelo</item>
+        <item>Salir</item>
     </string-array>
 
     <string-array name="place_type">
